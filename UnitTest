@@ -1,0 +1,41 @@
+from PermutationChecker import*
+import unittest
+
+
+# Assuming the following functions are already defined:
+# validate_input and permutations_check
+# Test cases
+class TestStringFunctions(unittest.TestCase):
+    
+    def test_validate_input_valid_strings(self):
+        self.assertEqual(validate_input("Hello World"), "helloworld")
+        self.assertEqual(validate_input("Python"), "python")
+    
+    def test_validate_input_empty_string(self):
+        self.assertEqual(validate_input(""), "")  # Allow empty strings
+    
+    def test_validate_input_non_string(self):
+        with self.assertRaises(ValueError):
+            validate_input(1234)  # Not a string
+    
+    def test_validate_input_invalid_characters(self):
+        with self.assertRaises(ValueError):
+            validate_input("Hello123")  # Contains numbers
+        with self.assertRaises(ValueError):
+            validate_input("Hello@World!")  # Contains special characters
+    
+    def test_permutations_check_valid_permutations(self):
+        self.assertTrue(permutations_check("Listen", "Silent"))
+        self.assertTrue(permutations_check("A gentleman", "Elegant man"))
+    
+    def test_permutations_check_invalid_permutations(self):
+        self.assertFalse(permutations_check("Hello", "World"))  # Different letters
+        self.assertFalse(permutations_check("Python", "Java"))  # Different letters and lengths
+    
+    def test_permutations_check_different_lengths(self):
+        self.assertFalse(permutations_check("short", "longer"))
+        self.assertFalse(permutations_check("abc", "abcd"))
+
+if __name__ == "__main__":
+    unittest.main()
+
